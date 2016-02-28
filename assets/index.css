@@ -1,0 +1,144 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+h3 {
+  border-bottom: 1px solid #111;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+#success {
+  background: #64B76C;
+  color: white;
+  padding: 8px;
+  -webkit-transition: opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transition: opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  position: fixed;
+  top: 30px; right: 30px;
+}
+
+#success.hide {
+  opacity: 0;
+}
+
+#p5_loading {
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.menu-button,
+.close-button {
+  position: fixed;
+  top: 40px; right: 40px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.menu-button {
+  display: none;
+}
+
+.close-button {
+  z-index: 2;
+}
+
+.clear-button {
+  position: fixed;
+  bottom: 40px; right: 40px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.full-screen-button {
+  position: fixed;
+  bottom: 40px; left: 40px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sounds-wrapper {
+  position: fixed;
+  background: white;
+  top: 30px; right: 30px; bottom: 30px;
+
+  border: 1px solid #111;
+  padding: 40px 20px;
+  font-size: 16px;
+  overflow-y: auto;
+
+  /*border-right: 4px solid #111;*/
+
+  width: 340px;
+  /*-webkit-transform: translateX(340px);*/
+  /*transform: translateX(340px);*/
+  opacity: 0;
+  visibility: hidden;
+
+  -webkit-transition: opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transition: opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+}
+
+.sound {
+  display: flex;
+  justify-content: space-between;
+
+  /*margin-bottom: 10px;*/
+  padding: 8px;
+}
+
+.sound span {
+  margin-right: 5px;
+}
+
+.sound:hover .button {
+  display: inline;
+}
+
+.sounds-wrapper.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sound.active {
+  /*text-decoration: line-through;*/
+  /*opacity: .2;*/
+  background: #64B76C;
+  color: white;
+}
+
+.sound.active .controls {
+  display: none;
+}
+
+.logo {
+  position: fixed;
+  top: 20px; left: 30px; bottom: 0;
+  width: 160px;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+}
