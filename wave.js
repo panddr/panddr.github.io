@@ -12,7 +12,7 @@ function Wave(amplitude, x, y, maxWeight, color) {
     this.yvalues = new Array(floor(width/4));
   }
 
-  this.calcWave = function() {
+  this.draw = function() {
     this.level = this.amplitude.getLevel();
     this.size = map(this.level, 0, 1, 10, 25); // Height of wave
     this.weight = map(this.level, 0, 1, 0, this.maxWeight); // Height of wave

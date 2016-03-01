@@ -47,3 +47,7 @@ function launchIntoFullscreen(element) {
 fullScreenButton.onclick = function() {
   launchIntoFullscreen(document.documentElement);
 }
+
+
+var isEditing = false;
+

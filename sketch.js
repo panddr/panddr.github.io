@@ -67,10 +67,10 @@ function draw() {
   triangleShape3.draw();
   triangleShape4.draw();
 
-  wave1.calcWave();
-  wave2.calcWave();
-  wave3.calcWave();
-  wave4.calcWave();
+  wave1.draw();
+  wave2.draw();
+  wave3.draw();
+  wave4.draw();
 
   circle();
   // particlesLoop.draw();
@@ -89,20 +89,15 @@ function circle() {
   pop();
 }
 
-function keyTyped() {
-  var button = keyCode;
+window.addEventListener('keydown', e => {
+  if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
+    return;
+  }
+
+  const charCode = e.charCode || e.which || e.keyCode;
+  const key = String.fromCharCode(charCode).toUpperCase();
 
   setSelected();
-
-  // for (var i = 0; i < sounds.length; i++)  {
-  //   var sound = sounds[i].getAttribute("id");
-
-  //   sound = function() {
-  //     console.log('shit')
-  //   }
-
-  //   console.log(sound)
-  // }
 
   function drums1() {
     if (drumLoopSound1.isPlaying() ) {
@@ -119,69 +114,109 @@ function keyTyped() {
   }
 
   function pad1() {
-    if (!pad1Sound.isPlaying() ) {
+    if (pad1Sound.isPlaying() ) {
+      wave1.init();
+      pad1Sound.stop();
+      pad1Sound.play();
+    } else {
+      wave1.init();
       pad1Sound.play();
     }
   }
 
   function pad2() {
-    if (!pad2Sound.isPlaying() ) {
+    if (pad2Sound.isPlaying() ) {
+      wave1.init();
+      pad2Sound.stop();
+      pad2Sound.play();
+    } else {
+      wave1.init();
       pad2Sound.play();
     }
   }
 
   function pad3() {
-    if (!pad3Sound.isPlaying() ) {
+    if (pad3Sound.isPlaying() ) {
+      wave1.init();
+      pad3Sound.stop();
+      pad3Sound.play();
+    } else {
+      wave1.init();
       pad3Sound.play();
     }
   }
 
   function pad4() {
-    if (!pad4Sound.isPlaying() ) {
+    if (pad4Sound.isPlaying() ) {
+      wave1.init();
+      pad4Sound.stop();
+      pad4Sound.play();
+    } else {
+      wave1.init();
       pad4Sound.play();
     }
   }
 
   function lead1() {
-    if (!lead1Sound.isPlaying() ) {
+    if (lead1Sound.isPlaying() ) {
+      lead1Sound.stop();
+      lead1Sound.play();
+    } else {
       lead1Sound.play();
     }
   }
 
   function lead2() {
-    if (!lead2Sound.isPlaying() ) {
+    if (lead2Sound.isPlaying() ) {
+      lead2Sound.stop();
+      lead2Sound.play();
+    } else {
       lead2Sound.play();
     }
   }
 
   function lead3() {
-    if (!lead3Sound.isPlaying() ) {
+    if (lead3Sound.isPlaying() ) {
+      lead3Sound.stop();
+      lead3Sound.play();
+    } else {
       lead3Sound.play();
     }
   }
 
   function lead4() {
-    if (!lead4Sound.isPlaying() ) {
+    if (lead4Sound.isPlaying() ) {
+      lead4Sound.stop();
+      lead4Sound.play();
+    } else {
       lead4Sound.play();
     }
   }
 
   function snare() {
-    if (!snareSound.isPlaying() ) {
+    if (snareSound.isPlaying() ) {
+      particles.init();
+      snareSound.stop();
+      snareSound.play();
+    } else {
       particles.init();
       snareSound.play();
     }
   }
 
   function kick() {
-    if (!kickSound.isPlaying() ) {
+    if (kickSound.isPlaying() ) {
+      sticks.init();
+      kickSound.stop();
+      kickSound.play();
+    } else {
       sticks.init();
       kickSound.play();
     }
   }
 
-  if (localStorage.getItem(keyCode)) {
-    var sound = localStorage.getItem(keyCode) + '()';
+  if (localStorage.getItem(key)) {
+    var sound = localStorage.getItem(key) + '()';
     eval(sound);
   } else {
     soundsWrapper.classList.add('active');
@@ -197,7 +232,7 @@ function keyTyped() {
 
       selectButton.onclick = function() {
         var sound = this.parentNode.parentNode.getAttribute("id");
-        localStorage.setItem(button, sound);
+        localStorage.setItem(key, sound);
         localStorage.setItem(sound, 'selected');
         this.parentNode.classList.add('active');
         soundsWrapper.classList.remove('active');
@@ -210,9 +245,8 @@ function keyTyped() {
       }
     };
   }
+});
 
-  return false;
-}
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
