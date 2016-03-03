@@ -6,6 +6,12 @@ body {
   box-sizing: border-box;
 }
 
+h3 {
+  font-weight: normal;
+  padding-left: 10px;
+  width: 100%;
+}
+
 #select-message {
   position: fixed;
   left: 50%; top: 50%;
@@ -33,10 +39,27 @@ body {
 .button {
   cursor: pointer;
   margin-right: 20px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 8px;
+  border: 1px solid #111;
 }
 
 .close-button {
   z-index: 2;
+}
+
+#clear-button {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+#clear-button.hide {
+  display: none;
 }
 
 .secondary-menu {
@@ -47,22 +70,24 @@ body {
 }
 
 .sounds-wrapper {
-  /*display: flex;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;*/
+  /*justify-content: center;*/
+  align-items: center;
 
+  width: 245px;
   position: fixed;
   background: white;
   top:0; right: 0; bottom: 0;
 
-  /*border-left: 1px solid #111;*/
+  border-left: 4px solid #111;
   font-size: 16px;
   padding: 0 10px;
+  /*padding-bottom: 100px;*/
   overflow-y: auto;
   /*height: 104px;*/
-  /*-webkit-transform: translateY(97px);
-  transform: translateY(97px);*/
+  -webkit-transform: translateX(222px);
+  transform: translateX(222px);
   /*opacity: 0;
   visibility: hidden;*/
 
@@ -72,14 +97,25 @@ body {
   transition: transform .3s ease-in-out, opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
 }
 
+body:before {
+  /*content: 'sounds';*/
+  position: fixed;
+  z-index: 1;
+  width: 200px;
+  height: 100px;
+  bottom: 0; right: 0;
+  background: black;
+  background: linear-gradient(to top,rgba(255,255,255,1) 0,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%);
+}
+
 .sound {
   display: flex;
   align-items: center;
 
   cursor: pointer;
   text-align: center;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   margin: 10px;
   /*border-bottom: 8px solid #111;*/
   /*border: 1px solid #111;*/
@@ -93,8 +129,8 @@ body {
 .sounds-wrapper:hover {
   /*visibility: visible;
   opacity: 1;*/
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
 }
 
 .sound.active {

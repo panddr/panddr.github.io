@@ -24,11 +24,18 @@ var fullScreenButton = document.getElementById('full-screen-button');
 //   console.log(start)
 // }
 
+if (!localStorage.getItem('tipIsShown', 'true')) {
+  clearButton.classList.add('hide');
+}
+
 clearButton.onclick = function() {
   localStorage.clear();
   setSelected();
-  document.getElementById('select-message').innerHTML = 'Select sound';
+  document.getElementById('select-message').innerHTML = 'Select sound ☛';
   document.getElementById('select-message').classList.remove('hide');
+
+  clearButton.classList.add('hide');
+  drumLoopSound1.stop();
 }
 
 

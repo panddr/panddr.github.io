@@ -106,8 +106,6 @@ window.addEventListener('keydown', e => {
 
   setSelected();
 
-  console.log(localStorage)
-
   if (localStorage.getItem(key)) {
     var playSound = localStorage.getItem(key) + '()';
     eval(playSound);
@@ -121,6 +119,7 @@ window.addEventListener('keydown', e => {
     setSelected();
     sound = false;
 
+    clearButton.classList.remove('hide');
     document.getElementById('select-message').innerHTML = 'Hurray!';
 
     setTimeout(function() {
