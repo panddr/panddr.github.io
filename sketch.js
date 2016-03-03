@@ -94,8 +94,6 @@ function circle() {
 
 if (!localStorage.getItem('tipIsShown', 'true')) {
   document.getElementById('select-message').innerHTML = 'Select sound ☛';
-} else {
-  document.getElementById('select-message').classList.add('hide');
 }
 
 window.addEventListener('keydown', e => {
@@ -126,7 +124,7 @@ window.addEventListener('keydown', e => {
     document.getElementById('select-message').innerHTML = 'Hurray!';
 
     setTimeout(function() {
-      document.getElementById('select-message').innerHTML = '';
+      document.getElementById('select-message').classList.add('hide');
     }, 1000);
   }
 });
