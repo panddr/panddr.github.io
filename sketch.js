@@ -1,3 +1,6 @@
+var key,
+    sound;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -40,7 +43,7 @@ function setup() {
   wave4 = new Wave(pad4Amplitude, width/4, height/4, 100, '#97E48B');
   wave4.init();
 
-  triangleShape1 = new TriangleShape(lead1Amplitude, 'rgba(238, 49, 36, 1)', 1000, 300, 1600, height/10, height/3);
+  triangleShape1 = new TriangleShape(lead1Amplitude, '#DA322A', 1000, 300, 1600, height/10, height/3);
   triangleShape2 = new TriangleShape(lead2Amplitude, '#FF8243', -800, -200, -1200, height/8, height/3);
   triangleShape3 = new TriangleShape(lead3Amplitude, '#FFC743', 600, 100, 1000, height/6, height/3);
   triangleShape4 = new TriangleShape(lead4Amplitude, '#FFE855', -400, -100, -800, height/5, height/3);
@@ -89,168 +92,188 @@ function circle() {
   pop();
 }
 
+if (!localStorage.getItem('tipIsShown', 'true')) {
+  document.getElementById('select-message').innerHTML = 'Select sound ☛';
+} else {
+  document.getElementById('select-message').classList.add('hide');
+}
+
 window.addEventListener('keydown', e => {
   if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
     return;
   }
 
   const charCode = e.charCode || e.which || e.keyCode;
-  const key = String.fromCharCode(charCode).toUpperCase();
+  key = String.fromCharCode(charCode).toUpperCase();
 
   setSelected();
 
-  function drums1() {
-    if (drumLoopSound1.isPlaying() ) {
-      drumLoopSound1.stop();
-    } else {
-      drumLoopSound1.loop();
-    }
-  }
-
-  function chord2() {
-    if (!chord2Sound.isPlaying() ) {
-      chord2Sound.play();
-    }
-  }
-
-  function pad1() {
-    if (pad1Sound.isPlaying() ) {
-      wave1.init();
-      pad1Sound.stop();
-      pad1Sound.play();
-    } else {
-      wave1.init();
-      pad1Sound.play();
-    }
-  }
-
-  function pad2() {
-    if (pad2Sound.isPlaying() ) {
-      wave1.init();
-      pad2Sound.stop();
-      pad2Sound.play();
-    } else {
-      wave1.init();
-      pad2Sound.play();
-    }
-  }
-
-  function pad3() {
-    if (pad3Sound.isPlaying() ) {
-      wave1.init();
-      pad3Sound.stop();
-      pad3Sound.play();
-    } else {
-      wave1.init();
-      pad3Sound.play();
-    }
-  }
-
-  function pad4() {
-    if (pad4Sound.isPlaying() ) {
-      wave1.init();
-      pad4Sound.stop();
-      pad4Sound.play();
-    } else {
-      wave1.init();
-      pad4Sound.play();
-    }
-  }
-
-  function lead1() {
-    if (lead1Sound.isPlaying() ) {
-      lead1Sound.stop();
-      lead1Sound.play();
-    } else {
-      lead1Sound.play();
-    }
-  }
-
-  function lead2() {
-    if (lead2Sound.isPlaying() ) {
-      lead2Sound.stop();
-      lead2Sound.play();
-    } else {
-      lead2Sound.play();
-    }
-  }
-
-  function lead3() {
-    if (lead3Sound.isPlaying() ) {
-      lead3Sound.stop();
-      lead3Sound.play();
-    } else {
-      lead3Sound.play();
-    }
-  }
-
-  function lead4() {
-    if (lead4Sound.isPlaying() ) {
-      lead4Sound.stop();
-      lead4Sound.play();
-    } else {
-      lead4Sound.play();
-    }
-  }
-
-  function snare() {
-    if (snareSound.isPlaying() ) {
-      particles.init();
-      snareSound.stop();
-      snareSound.play();
-    } else {
-      particles.init();
-      snareSound.play();
-    }
-  }
-
-  function kick() {
-    if (kickSound.isPlaying() ) {
-      sticks.init();
-      kickSound.stop();
-      kickSound.play();
-    } else {
-      sticks.init();
-      kickSound.play();
-    }
-  }
+  console.log(localStorage)
 
   if (localStorage.getItem(key)) {
-    var sound = localStorage.getItem(key) + '()';
-    eval(sound);
-  } else {
-    soundsWrapper.classList.add('active');
+    var playSound = localStorage.getItem(key) + '()';
+    eval(playSound);
+  } else if (sound && !localStorage.getItem(sound)) {
+    localStorage.setItem(key, sound);
+    localStorage.setItem(sound, 'selected');
+    localStorage.setItem('tipIsShown', 'true');
 
-    for (var i = 0; i < sounds.length; i++) {
-      var playButton = sounds[i].querySelector('#play');
-      var selectButton = sounds[i].querySelector('#select');
+    var playSound = localStorage.getItem(key) + '()';
+    eval(playSound);
+    setSelected();
+    sound = false;
 
-      playButton.onclick = function() {
-        var playSound = this.parentNode.parentNode.getAttribute("id") + '()';
-        eval(playSound);
-      }
+    document.getElementById('select-message').innerHTML = 'Hurray!';
 
-      selectButton.onclick = function() {
-        var sound = this.parentNode.parentNode.getAttribute("id");
-        localStorage.setItem(key, sound);
-        localStorage.setItem(sound, 'selected');
-        this.parentNode.classList.add('active');
-        soundsWrapper.classList.remove('active');
-
-        myDiv = createDiv('The sound was successfully selected').id('success');
-
-        setTimeout(function() {
-          select('#success').remove();
-        }, 2000);
-      }
-    };
+    setTimeout(function() {
+      document.getElementById('select-message').innerHTML = '';
+    }, 1000);
   }
 });
+
+for (var i = 0; i < sounds.length; i++) {
+  var previousSound;
+
+  sounds[i].onclick = function() {
+    var playSound = this.getAttribute("id") + '()';
+    sound = this.getAttribute("id");
+    eval(playSound);
+
+    if (!localStorage.getItem(this.getAttribute("id"))) {
+      this.classList.add('selected');
+
+      document.getElementById('select-message').innerHTML = 'Now type a key';
+    }
+
+    if (previousSound && previousSound!=this) {
+      previousSound.classList.remove('selected');
+    }
+
+    previousSound = this;
+  }
+};
 
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+function drums1() {
+  if (drumLoopSound1.isPlaying() ) {
+    drumLoopSound1.stop();
+  } else {
+    drumLoopSound1.loop();
+  }
+}
+
+function chord2() {
+  if (!chord2Sound.isPlaying() ) {
+    chord2Sound.play();
+  }
+}
+
+function pad1() {
+  if (pad1Sound.isPlaying() ) {
+    wave1.init();
+    pad1Sound.stop();
+    pad1Sound.play();
+  } else {
+    wave1.init();
+    pad1Sound.play();
+  }
+}
+
+function pad2() {
+  if (pad2Sound.isPlaying() ) {
+    wave1.init();
+    pad2Sound.stop();
+    pad2Sound.play();
+  } else {
+    wave1.init();
+    pad2Sound.play();
+  }
+}
+
+function pad3() {
+  if (pad3Sound.isPlaying() ) {
+    wave1.init();
+    pad3Sound.stop();
+    pad3Sound.play();
+  } else {
+    wave1.init();
+    pad3Sound.play();
+  }
+}
+
+function pad4() {
+  if (pad4Sound.isPlaying() ) {
+    wave1.init();
+    pad4Sound.stop();
+    pad4Sound.play();
+  } else {
+    wave1.init();
+    pad4Sound.play();
+  }
+}
+
+function lead1() {
+  if (lead1Sound.isPlaying() ) {
+    lead1Sound.stop();
+    lead1Sound.play();
+  } else {
+    lead1Sound.play();
+  }
+}
+
+function lead2() {
+  if (lead2Sound.isPlaying() ) {
+    lead2Sound.stop();
+    lead2Sound.play();
+  } else {
+    lead2Sound.play();
+  }
+}
+
+function lead3() {
+  if (lead3Sound.isPlaying() ) {
+    lead3Sound.stop();
+    lead3Sound.play();
+  } else {
+    lead3Sound.play();
+  }
+}
+
+function lead4() {
+  if (lead4Sound.isPlaying() ) {
+    lead4Sound.stop();
+    lead4Sound.play();
+  } else {
+    lead4Sound.play();
+  }
+}
+
+function snare() {
+  if (snareSound.isPlaying() ) {
+    particles.init();
+    snareSound.stop();
+    snareSound.play();
+  } else {
+    particles.init();
+    snareSound.play();
+  }
+}
+
+function kick() {
+  if (kickSound.isPlaying() ) {
+    sticks.init();
+    kickSound.stop();
+    kickSound.play();
+  } else {
+    sticks.init();
+    kickSound.play();
+  }
+}
+
 
 function preload() {
   lead1Sound = loadSound('assets/sounds/lead1.mp3');
