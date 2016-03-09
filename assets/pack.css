@@ -1,0 +1,234 @@
+@font-face {
+  font-family: 'Circe';
+  src: url('/assets/fonts/CRC55.woff') format('woff'), /* Modern Browsers */
+       url('/assets/fonts/CRC55.ttf')  format('truetype'); /* Safari, Android, iOS */
+
+  font-style:   normal;
+  font-weight:  400;
+}
+
+@font-face {
+  font-family: 'Circe';
+  src: url('/assets/fonts/CRC65.woff') format('woff'), /* Modern Browsers */
+       url('/assets/fonts/CRC65.ttf')  format('truetype'); /* Safari, Android, iOS */
+
+  font-style:   normal;
+  font-weight:  700;
+}
+
+body {
+  font-family: "Circe", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  padding: 0; margin: 0;
+}
+
+canvas {
+  vertical-align: top;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*h3 {
+  display: inline-block;
+  border: 1px solid #111;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+}*/
+
+.pack-name {
+  position: fixed;
+  left: 50%; top: 20px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin: 0;
+}
+
+#select-message {
+  position: fixed;
+  left: 50%; top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+  font-weight: 400;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: -40px;
+}
+
+#select-message.hide {
+  display: none;
+}
+
+#p5_loading {
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.hide {
+  display: none;
+}
+
+#clear-button {
+  margin-left: 20px;
+}
+
+.sounds-pack {
+  /*display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;*/
+
+  position: fixed;
+  left:0; right: 0; bottom: 0;
+
+  font-size: 16px;
+  padding: 0 40px;
+  -webkit-transform: translateY(121px);
+  transform: translateY(121px);
+
+  -webkit-transition: opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transition: opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out, -webkit-transform .3s ease-in-out;
+}
+
+.sounds-pack .controls {
+  display: flex;
+}
+
+.sounds-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  border-top: 1px solid #111;
+  margin-top: 20px;
+  background: white;
+}
+
+.sounds-pack ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-image: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body:before {
+  /*content: 'sounds';*/
+  position: fixed;
+  z-index: 1;
+  width: 200px;
+  height: 100px;
+  bottom: 0; right: 0;
+  background: black;
+  background: linear-gradient(to top,rgba(255,255,255,1) 0,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%);
+}
+
+.sound {
+  display: flex;
+  align-items: center;
+
+  -webkit-filter: grayscale(100%);
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  height: 120px;
+  /*margin: 10px;*/
+  /*border-right: 8px solid #111;*/
+}
+
+.sound span {
+  margin-right: 5px;
+}
+
+.sounds-pack.active,
+.sounds-pack:hover {
+  /*visibility: visible;
+  opacity: 1;*/
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.sound.active {
+  -webkit-filter: grayscale(0);
+  border-top: 3px solid #64B76C;
+  /*margin-bottom: 40px;*/
+}
+
+.sound.selected {
+  -webkit-filter: grayscale(0);
+  border-top: 3px solid #111;
+  /*background: #eee;*/
+  /*margin-bottom: 40px;*/
+}
+
+.sound.active .controls {
+  display: none;
+}
+
+.sound img {
+  display: block;
+  width: 100%;
+}
+
+.secondary-menu {
+  display: flex;
+  align-items: center;
+
+  position: fixed;
+  top: 20px; right: 40px;
+}
+
+.secondary-menu .button {
+  margin-left: 20px;
+}
+
+#record-button {
+  color: #DA322A;
+}
+
+#full-screen-button img {
+  width: 20px;
+}
+
+#back-button {
+  position: fixed;
+  left: 40px; top: 10px;
+}
+
+#back-button img {
+  display: block;
+  width: 40px;
+}
+
+#full-screen-button:-webkit-full-screen,
+#full-screen-button:-moz-full-screen,
+#full-screen-button:fullscreen {
+  display: none;
+}
+
+
+.hide-controls #select-message,
+.hide-controls #sounds-pack {
+  display: none;
+}

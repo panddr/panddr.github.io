@@ -1,35 +1,38 @@
 var key,
-    sound;
+    demo,
+    previousElement = null,
+    soundId = null,
+    sound = null;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
   amplitudeDrumLoop1 = new p5.Amplitude();
-  amplitudeDrumLoop1.setInput(drumLoopSound1);
+  amplitudeDrumLoop1.setInput(drums1);
 
   snareAmplitude = new p5.Amplitude();
-  snareAmplitude.setInput(snareSound);
+  snareAmplitude.setInput(snare);
 
   kickAmplitude = new p5.Amplitude();
-  kickAmplitude.setInput(kickSound);
+  kickAmplitude.setInput(kick);
 
   pad1Amplitude = new p5.Amplitude();
-  pad1Amplitude.setInput(pad1Sound);
+  pad1Amplitude.setInput(pad1);
   pad2Amplitude = new p5.Amplitude();
-  pad2Amplitude.setInput(pad2Sound);
+  pad2Amplitude.setInput(pad2);
   pad3Amplitude = new p5.Amplitude();
-  pad3Amplitude.setInput(pad3Sound);
+  pad3Amplitude.setInput(pad3);
   pad4Amplitude = new p5.Amplitude();
-  pad4Amplitude.setInput(pad4Sound);
+  pad4Amplitude.setInput(pad4);
 
   lead1Amplitude = new p5.Amplitude();
-  lead1Amplitude.setInput(lead1Sound);
+  lead1Amplitude.setInput(lead1);
   lead2Amplitude = new p5.Amplitude();
-  lead2Amplitude.setInput(lead2Sound);
+  lead2Amplitude.setInput(lead2);
   lead3Amplitude = new p5.Amplitude();
-  lead3Amplitude.setInput(lead3Sound);
+  lead3Amplitude.setInput(lead3);
   lead4Amplitude = new p5.Amplitude();
-  lead4Amplitude.setInput(lead4Sound);
+  lead4Amplitude.setInput(lead4);
 
   wave1 = new Wave(pad1Amplitude, width/4, height/4 + 300, 240, '#6CC071');
   wave1.init();
@@ -53,12 +56,6 @@ function setup() {
 
   sticks = new Sticks(kickAmplitude, 0, width/2+300, height/3);
   sticks.init();
-
-  // particlesLoop = new Particles(amplitudeDrumLoop1, '#174489', width/2+100, height/3);
-  // particlesLoop.init();
-
-  // sticksLoop = new Sticks(amplitudeDrumLoop1, 0, width/2+100, height/3);
-  // sticksLoop.init();
 }
 
 function draw() {
@@ -76,8 +73,6 @@ function draw() {
   wave4.draw();
 
   circle();
-  // particlesLoop.draw();
-  // sticksLoop.draw();
 
   particles.draw();
   sticks.draw();
@@ -92,8 +87,37 @@ function circle() {
   pop();
 }
 
+function playSound() {
+  if (sound !== drums1) {
+    if (sound.isPlaying() ) {
+      if (sound == pad1) { wave1.init(); }
+      if (sound == pad2) { wave2.init(); }
+      if (sound == pad3) { wave3.init(); }
+      if (sound == pad4) { wave4.init(); }
+      if (sound == kick) { sticks.init(); }
+      if (sound == snare) { particles.init(); }
+      sound.stop();
+      sound.play();
+    } else {
+      if (sound == pad1) { wave1.init(); }
+      if (sound == pad2) { wave2.init(); }
+      if (sound == pad3) { wave3.init(); }
+      if (sound == pad4) { wave4.init(); }
+      if (sound == kick) { sticks.init(); }
+      if (sound == snare) { particles.init(); }
+      sound.play();
+    }
+  } else {
+    if (sound.isPlaying()) {
+      sound.stop();
+    } else {
+      sound.loop();
+    }
+  }
+}
+
 if (!localStorage.getItem('tipIsShown', 'true')) {
-  document.getElementById('select-message').innerHTML = 'Select sound ☛';
+  selectMessage.innerHTML = 'Select sound';
 }
 
 window.addEventListener('keydown', e => {
@@ -106,182 +130,71 @@ window.addEventListener('keydown', e => {
 
   setSelected();
 
-  if (localStorage.getItem(key)) {
-    var playSound = localStorage.getItem(key) + '()';
-    eval(playSound);
-  } else if (sound && !localStorage.getItem(sound)) {
-    localStorage.setItem(key, sound);
-    localStorage.setItem(sound, 'selected');
+  if (localStorage.getItem(key) && !songIsPlaying && !demoIsPlaying) {
+    sound = eval(localStorage.getItem(key));
+    playSound();
+  } else if (sound && !localStorage.getItem(sound) && !songIsPlaying && !demoIsPlaying) {
+    localStorage.setItem(key, soundId);
+    localStorage.setItem(soundId, 'selected');
     localStorage.setItem('tipIsShown', 'true');
 
-    var playSound = localStorage.getItem(key) + '()';
-    eval(playSound);
     setSelected();
     sound = false;
 
     clearButton.classList.remove('hide');
-    document.getElementById('select-message').innerHTML = 'Hurray!';
+    selectMessage.innerHTML = 'Hurray!';
 
     setTimeout(function() {
-      document.getElementById('select-message').classList.add('hide');
+      selectMessage.classList.add('hide');
     }, 1000);
   }
 });
 
 for (var i = 0; i < sounds.length; i++) {
-  var previousSound;
-
   sounds[i].onclick = function() {
-    var playSound = this.getAttribute("id") + '()';
-    sound = this.getAttribute("id");
-    eval(playSound);
+    soundId = this.getAttribute("id");
+    sound = eval(soundId);
+
+    if (previousElement) {
+      var previousSound = eval(previousElement.getAttribute("id"));
+    }
+
+    playSound();
 
     if (!localStorage.getItem(this.getAttribute("id"))) {
       this.classList.add('selected');
 
-      document.getElementById('select-message').innerHTML = 'Now type a key';
+      selectMessage.innerHTML = 'Now type a key';
     }
 
     if (previousSound && previousSound!=this) {
-      previousSound.classList.remove('selected');
+      previousElement.classList.remove('selected');
     }
 
-    previousSound = this;
+    if (previousSound && previousSound == drums1 && !localStorage.getItem(previousSound)) {
+      previousSound.stop();
+    }
+
+    previousElement = this;
   }
 };
-
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function drums1() {
-  if (drumLoopSound1.isPlaying() ) {
-    drumLoopSound1.stop();
-  } else {
-    drumLoopSound1.loop();
-  }
-}
-
-function chord2() {
-  if (!chord2Sound.isPlaying() ) {
-    chord2Sound.play();
-  }
-}
-
-function pad1() {
-  if (pad1Sound.isPlaying() ) {
-    wave1.init();
-    pad1Sound.stop();
-    pad1Sound.play();
-  } else {
-    wave1.init();
-    pad1Sound.play();
-  }
-}
-
-function pad2() {
-  if (pad2Sound.isPlaying() ) {
-    wave1.init();
-    pad2Sound.stop();
-    pad2Sound.play();
-  } else {
-    wave1.init();
-    pad2Sound.play();
-  }
-}
-
-function pad3() {
-  if (pad3Sound.isPlaying() ) {
-    wave1.init();
-    pad3Sound.stop();
-    pad3Sound.play();
-  } else {
-    wave1.init();
-    pad3Sound.play();
-  }
-}
-
-function pad4() {
-  if (pad4Sound.isPlaying() ) {
-    wave1.init();
-    pad4Sound.stop();
-    pad4Sound.play();
-  } else {
-    wave1.init();
-    pad4Sound.play();
-  }
-}
-
-function lead1() {
-  if (lead1Sound.isPlaying() ) {
-    lead1Sound.stop();
-    lead1Sound.play();
-  } else {
-    lead1Sound.play();
-  }
-}
-
-function lead2() {
-  if (lead2Sound.isPlaying() ) {
-    lead2Sound.stop();
-    lead2Sound.play();
-  } else {
-    lead2Sound.play();
-  }
-}
-
-function lead3() {
-  if (lead3Sound.isPlaying() ) {
-    lead3Sound.stop();
-    lead3Sound.play();
-  } else {
-    lead3Sound.play();
-  }
-}
-
-function lead4() {
-  if (lead4Sound.isPlaying() ) {
-    lead4Sound.stop();
-    lead4Sound.play();
-  } else {
-    lead4Sound.play();
-  }
-}
-
-function snare() {
-  if (snareSound.isPlaying() ) {
-    particles.init();
-    snareSound.stop();
-    snareSound.play();
-  } else {
-    particles.init();
-    snareSound.play();
-  }
-}
-
-function kick() {
-  if (kickSound.isPlaying() ) {
-    sticks.init();
-    kickSound.stop();
-    kickSound.play();
-  } else {
-    sticks.init();
-    kickSound.play();
-  }
-}
-
-
 function preload() {
-  lead1Sound = loadSound('assets/sounds/lead1.mp3');
-  lead2Sound = loadSound('assets/sounds/lead2.mp3');
-  lead3Sound = loadSound('assets/sounds/lead3.mp3');
-  lead4Sound = loadSound('assets/sounds/lead4.mp3');
-  snareSound = loadSound('assets/sounds/snare.mp3');
-  kickSound = loadSound('assets/sounds/kick.mp3');
-  pad1Sound = loadSound('assets/sounds/pad1.mp3');
-  pad2Sound = loadSound('assets/sounds/pad2.mp3');
-  pad3Sound = loadSound('assets/sounds/pad3.mp3');
-  pad4Sound = loadSound('assets/sounds/pad4.mp3');
-  drumLoopSound1 = loadSound('assets/sounds/drum_loop1.mp3');
+  lead1 = loadSound('/assets/sounds/lead1.mp3');
+  lead2 = loadSound('/assets/sounds/lead2.mp3');
+  lead3 = loadSound('/assets/sounds/lead3.mp3');
+  lead4 = loadSound('/assets/sounds/lead4.mp3');
+  snare = loadSound('/assets/sounds/snare.mp3');
+  kick = loadSound('/assets/sounds/kick.mp3');
+  pad1 = loadSound('/assets/sounds/pad1.mp3');
+  pad2 = loadSound('/assets/sounds/pad2.mp3');
+  pad3 = loadSound('/assets/sounds/pad3.mp3');
+  pad4 = loadSound('/assets/sounds/pad4.mp3');
+  drums1 = loadSound('/assets/sounds/drum_loop1.mp3');
+
+  demo = loadJSON('/assets/demos/jekka.json');
 }

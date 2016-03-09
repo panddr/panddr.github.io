@@ -1,3 +1,6 @@
+var soundsPack = document.getElementById('sounds-pack');
+
+
 var sounds = document.getElementsByClassName("sound");
 var setSelected = function() {
   for (var i = 0; i < sounds.length; i++) {
@@ -5,6 +8,7 @@ var setSelected = function() {
     if (isSelected) {
       sounds[i].classList.add('active');
       sounds[i].classList.remove('selected');
+      soundsPack.classList.remove('active');
     } else {
       sounds[i].classList.remove('active');
     }
@@ -13,32 +17,29 @@ var setSelected = function() {
 
 setSelected();
 
-// var recordButton = document.getElementById('record-button');
 var menu = document.getElementById('menu');
 var clearButton = document.getElementById('clear-button');
-var fullScreenButton = document.getElementById('full-screen-button');
-
-// recordButton.onclick = function() {
-//   var start = new Date().getTime();
-
-//   console.log(start)
-// }
 
 if (!localStorage.getItem('tipIsShown', 'true')) {
   clearButton.classList.add('hide');
 }
 
+var selectMessage = document.getElementById('select-message');
+
 clearButton.onclick = function() {
   localStorage.clear();
   setSelected();
-  document.getElementById('select-message').innerHTML = 'Select sound ☛';
-  document.getElementById('select-message').classList.remove('hide');
+  selectMessage.innerHTML = 'Select sound';
+  selectMessage.classList.remove('hide');
+  soundsPack.classList.add('active');
 
   clearButton.classList.add('hide');
-  drumLoopSound1.stop();
+  drums1.stop();
 }
 
 
+
+//fullscreen
 
 function launchIntoFullscreen(element) {
   if(element.requestFullscreen) {
@@ -52,6 +53,8 @@ function launchIntoFullscreen(element) {
   }
 }
 
+var fullScreenButton = document.getElementById('full-screen-button');
+
 fullScreenButton.onclick = function() {
   launchIntoFullscreen(document.documentElement);
 }
@@ -59,16 +62,12 @@ fullScreenButton.onclick = function() {
 
 
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   var canvas = document.getElementsByTagName('canvas');
 
-//   console.log(canvas)
 
-//   canvas[.onclick = function() {
-//     this.classList.remove('selected');
-//     document.getElementById('select-message').innerHTML = '';
-//     sound = false;
 
-//     console.log('shit')
-//   }
-// });
+var soundsUl = document.getElementById('sounds');
+var sound = document.getElementsByClassName('sound');
+
+var soundWidth = 100;
+
+soundsUl.style.minWidth = soundWidth * sound.length + "px";

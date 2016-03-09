@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playtronica</title>
+  <script src="/libraries/p5.js" type="text/javascript"></script>
+  <script src="/libraries/p5.dom.js" type="text/javascript"></script>
+  <script src="/libraries/p5.sound.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/assets/index.css">
+  <link rel="stylesheet" href="/assets/pack.css">
+</head>
+<body>
+  <div class="button" id="back-button"><a href="/"><img src="/assets/images/back.svg"></a></div>
+  <h3 class="pack-name">Jekka's pack</h3>
+  <div class="secondary-menu">
+    <div class="button" id="demo-button">Demo</div>
+    <div class="button" id="record-button">Rec</div>
+    <div class="button hide" id="duration-panel">0:0</div>
+    <div class="button hide" id="stop-button">Stop recording</div>
+    <div class="button hide" id="play-button">Play</div>
+    <div class="button hide" id="save-button">Save</div>
+    <div class="button hide" id="cancel-button">Cancel</div>
+    <div class="button" id="full-screen-button"><img src="/assets/images/enter_full.svg"></div>
+  </div>
+  <h2 id="select-message"></h2>
+  <div class="sounds-pack active" id="sounds-pack">
+    <div class="controls">
+      <div class="button" id="hide-sounds-button">Sounds</div>
+      <div class="button" id="clear-button">Reset</div>
+    </div>
+    <div class="sounds-wrapper">
+      <ul class="sounds" id="sounds">
+        <li class="sound" id="drums1"><img src="/assets/sounds/drum_loop1.png"></li>
+        <li class="sound" id="snare"><img src="/assets/sounds/snare.png"></li>
+        <li class="sound" id="kick"><img src="/assets/sounds/kick.png"></li>
+        <li class="sound" id="pad1"><img src="/assets/sounds/pad1.png"></li>
+        <li class="sound" id="pad2"><img src="/assets/sounds/pad2.png"></li>
+        <li class="sound" id="pad3"><img src="/assets/sounds/pad3.png"></li>
+        <li class="sound" id="pad4"><img src="/assets/sounds/pad4.png"></li>
+        <li class="sound" id="lead1"><img src="/assets/sounds/lead1.png"></li>
+        <li class="sound" id="lead2"><img src="/assets/sounds/lead2.png"></li>
+        <li class="sound" id="lead3"><img src="/assets/sounds/lead3.png"></li>
+        <li class="sound" id="lead4"><img src="/assets/sounds/lead4.png"></li>
+      </ul>
+    </div>
+  </div>
+  <script src="/wave.js" type="text/javascript"></script>
+  <script src="/triangle_shape.js" type="text/javascript"></script>
+  <script src="/particles.js" type="text/javascript"></script>
+  <script src="/sticks.js" type="text/javascript"></script>
+  <script src="/ui.js" type="text/javascript"></script>
+  <script src="/record.js" type="text/javascript"></script>
+  <script src="/sketch.js" type="text/javascript"></script>
+</body>
+</html>
