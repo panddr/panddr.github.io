@@ -130,16 +130,18 @@ window.addEventListener('keydown', e => {
 
   setSelected();
 
+  console.log(localStorage);
+
   if (localStorage.getItem(key) && !songIsPlaying && !demoIsPlaying) {
     sound = eval(localStorage.getItem(key));
     playSound();
-  } else if (sound && !localStorage.getItem(sound) && !songIsPlaying && !demoIsPlaying) {
+  } else if (soundId && !localStorage.getItem(sound) && !songIsPlaying && !demoIsPlaying) {
     localStorage.setItem(key, soundId);
     localStorage.setItem(soundId, 'selected');
     localStorage.setItem('tipIsShown', 'true');
 
     setSelected();
-    sound = false;
+    soundId = false;
 
     clearButton.classList.remove('hide');
     selectMessage.innerHTML = 'Hurray!';
