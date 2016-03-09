@@ -44,13 +44,16 @@ demoButton.onclick = function() {
             demoIsPlaying = false;
             body.classList.remove('hide-controls');
             sound.stop();
-
-            selectMessage.classList.remove('hide');
           }, demo.duration));
         } else {
           soundTimer.push(setTimeout(function() {
             sound.play();
           }, data.time));
+
+          soundTimer.push(setTimeout(function() {
+            demoIsPlaying = false;
+            body.classList.remove('hide-controls');
+          }, demo.duration));
         }
       }
 
@@ -176,13 +179,16 @@ playButton.onclick = function() {
           soundTimer.push(setTimeout(function() {
             songIsPlaying = false;
             sound.stop();
-
-            selectMessage.classList.remove('hide');
           }, song.duration));
         } else {
           soundTimer.push(setTimeout(function() {
             sound.play();
           }, data.time));
+
+          soundTimer.push(setTimeout(function() {
+            songIsPlaying = false;
+            body.classList.remove('hide-controls');
+          }, song.duration));
         }
       }
 
