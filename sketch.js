@@ -130,8 +130,6 @@ window.addEventListener('keydown', e => {
 
   setSelected();
 
-  console.log(localStorage);
-
   if (localStorage.getItem(key) && !songIsPlaying && !demoIsPlaying) {
     sound = eval(localStorage.getItem(key));
     playSound();
