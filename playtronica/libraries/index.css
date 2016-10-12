@@ -1,0 +1,19 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+canvas {
+  display: block;
+}
+
+#device_info {
+  position: fixed;
+  left: 10px; top: 10px;
+}
