@@ -17,3 +17,7 @@ canvas {
   position: fixed;
   left: 10px; top: 10px;
 }
+
+#key_data {
+  display: none;
+}

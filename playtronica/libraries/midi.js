@@ -36,7 +36,11 @@ function midi() {
     key68: 9,
     key69: 10,
     key70: 11,
-    key71: 12
+    key71: 12,
+    key72: 13,
+    key73: 14,
+    key74: 15,
+    key75: 16
   };
   // user interaction, mouse click
   function clickPlayOn(e) {
@@ -122,7 +126,16 @@ function midi() {
       }
       btn[sample - 1].classList.add('active');
       // btn[sample - 1].play(velocity);
-      dataP5[sample - 1].sound.play();
+      if (sample==16) {
+        if (dataP5[sample - 1].sound.isPlaying()) {
+          dataP5[sample - 1].sound.stop();
+        } else {
+          dataP5[sample - 1].sound.loop();
+        }
+
+      } else {
+        dataP5[sample - 1].sound.play();
+      }
       // if (btn[sample - 1].dataset.animation) {
       //   eval(btn[sample - 1].dataset.animation);
       // }

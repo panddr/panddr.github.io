@@ -7,11 +7,11 @@ function Wave(amplitude, x, y, maxWeight, color) {
   this.maxWeight = maxWeight;
   this.color = color;
   this.dx = TWO_PI / this.period * random(1, 1.4);
-  this.yvalues = new Array(floor(width/4));
+  this.yvalues = new Array(floor(width/2));
 
   this.draw = function() {
     this.level = this.amplitude.getLevel();
-    this.size = map(this.level, 0, 1, 10, 25); // Height of wave
+    this.size = map(this.level, 0, 1, 10, 250); // Height of wave
     this.weight = map(this.level, 0, 1, 0, this.maxWeight); // Height of wave
     this.freq = map(this.level, 0, 1, 0, 1); // Height of wave
     push();
@@ -31,12 +31,11 @@ function Wave(amplitude, x, y, maxWeight, color) {
     }
 
     translate(this.x,this.y);
-    // rotate(-PI*0.25);
+    rotate(-PI*0.5);
 
     fill(this.color);
     beginShape();
     for (var x = 0; x < this.yvalues.length; x++) {
-      // ellipse(x, height/2+yvalues[x], 16, 16);
       vertex(x, this.yvalues[x]);
     }
     for (var x = this.yvalues.length; x >= 0; x--) {
