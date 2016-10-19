@@ -23,6 +23,10 @@ function midi() {
   for (var i = 0; i < btn.length; i++) {
     addAudioProperties(btn[i]);
   }
+
+  // add event listeners
+  document.addEventListener('keydown', keyController);
+
   // this maps the MIDI key value (60 - 64) to our samples
   var sampleMap = {
     key60: 1,
@@ -42,14 +46,66 @@ function midi() {
     key74: 15,
     key75: 16
   };
-  // user interaction, mouse click
-  function clickPlayOn(e) {
-    e.target.classList.add('active');
-    e.target.play();
-  }
 
-  function clickPlayOff(e) {
-    e.target.classList.remove('active');
+  // qwerty keyboard controls. [q,w,e,r,t]
+  function keyController(e) {
+    if (e.type == "keydown") {
+      switch (e.keyCode) {
+        case 81:
+          dataP5[0].sound.play();
+          break;
+        case 87:
+          dataP5[1].sound.play();
+          break;
+        case 69:
+          dataP5[2].sound.play();
+          break;
+        case 82:
+          dataP5[3].sound.play();
+          break;
+        case 84:
+          dataP5[4].sound.play();
+          break;
+        case 89:
+          dataP5[5].sound.play();
+          break;
+        case 85:
+          dataP5[6].sound.play();
+          break;
+        case 73:
+          dataP5[7].sound.play();
+          break;
+        case 65:
+          dataP5[8].sound.play();
+          break;
+        case 83:
+          dataP5[9].sound.play();
+          break;
+        case 68:
+          dataP5[10].sound.play();
+          break;
+        case 70:
+          dataP5[11].sound.play();
+          break;
+        case 71:
+          dataP5[12].sound.play();
+          break;
+        case 72:
+          dataP5[13].sound.play();
+          break;
+        case 74:
+          dataP5[14].sound.play();
+          break;
+        case 75:
+          if (dataP5[15].sound.isPlaying()) {
+            dataP5[15].sound.stop();
+          } else {
+            dataP5[15].sound.loop();
+          }
+          break;
+        default:
+      }
+    }
   }
 
   // midi functions
