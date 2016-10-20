@@ -173,7 +173,7 @@ function draw() {
   // endShape();
 
 
-  fill('#EDB824');
+  fill('#FBDA2B');
   noStroke();
   var numPoints = int(map(amplitudeShit14.getLevel()*1000, 0, width*2, 0, 1000));
   var angle = 0;
