@@ -51,52 +51,52 @@ function midi() {
   function keyController(e) {
     if (e.type == "keydown") {
       switch (e.keyCode) {
-        case 81:
+        case 87:
           dataP5[0].sound.play();
           break;
-        case 87:
+        case 69:
           dataP5[1].sound.play();
           break;
-        case 69:
+        case 84:
           dataP5[2].sound.play();
           break;
-        case 82:
+        case 89:
           dataP5[3].sound.play();
           break;
-        case 84:
+        case 85:
           dataP5[4].sound.play();
           break;
-        case 89:
+        case 79:
           dataP5[5].sound.play();
           break;
-        case 85:
+        case 80:
           dataP5[6].sound.play();
           break;
-        case 73:
+        case 65:
           dataP5[7].sound.play();
           break;
-        case 65:
+        case 83:
           dataP5[8].sound.play();
           break;
-        case 83:
+        case 68:
           dataP5[9].sound.play();
           break;
-        case 68:
+        case 70:
           dataP5[10].sound.play();
           break;
-        case 70:
+        case 71:
           dataP5[11].sound.play();
           break;
-        case 71:
+        case 72:
           dataP5[12].sound.play();
           break;
-        case 72:
+        case 74:
           dataP5[13].sound.play();
           break;
-        case 74:
+        case 75:
           dataP5[14].sound.play();
           break;
-        case 75:
+        case 76:
           if (dataP5[15].sound.isPlaying()) {
             dataP5[15].sound.stop();
           } else {
