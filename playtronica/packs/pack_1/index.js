@@ -12,6 +12,8 @@ var amplitudeShit1,
 var count = 100;
 var t;
 
+var randomBg;
+
 function setup() {
   midi();
   createCanvas(windowWidth, windowHeight);
@@ -65,6 +67,12 @@ function setup() {
   amplitudeShit12 = new p5.Amplitude();
   amplitudeShit12.setInput(dataP5[11].sound);
 
+  amplitudeShit13 = new p5.Amplitude();
+  amplitudeShit13.setInput(dataP5[12].sound);
+
+  amplitudeShit14 = new p5.Amplitude();
+  amplitudeShit14.setInput(dataP5[13].sound);
+
   amplitudeShit15 = new p5.Amplitude();
   amplitudeShit15.setInput(dataP5[14].sound);
 
@@ -81,8 +89,11 @@ function setup() {
 }
 
 function draw() {
-  var bgColor = map(amplitudeShit2.getLevel(), 0, 0.1, 255, 0);
-  background(bgColor);
+  randomSeed(random(255));
+  var r = map(amplitudeShit2.getLevel(), 0, 0.1, 255, random(255));
+  var g = map(amplitudeShit2.getLevel(), 0, 0.1, 255, random(255));
+  var b = map(amplitudeShit2.getLevel(), 0, 0.1, 255, random(255));
+  background(r,g,b);
   noStroke();
 
 
@@ -160,6 +171,27 @@ function draw() {
   // vertex(width, 0);
   // vertex(0, 0);
   // endShape();
+
+
+  fill('#EDB824');
+  noStroke();
+  var numPoints = int(map(amplitudeShit14.getLevel()*1000, 0, width*2, 0, 1000));
+  var angle = 0;
+  var angleStep = 720.0/numPoints;
+  beginShape(TRIANGLE_STRIP);
+  outsideRadius = height + amplitudeShit14.getLevel()*height;
+  insideRadius = amplitudeShit14.getLevel();
+  for (var i = 0; i <= numPoints; i++) {
+    var px = triangleX + cos(radians(angle)) * outsideRadius;
+    var py = triangleY + sin(radians(angle)) * outsideRadius;
+    angle += angleStep;
+    vertex(px, py);
+    px = triangleX + cos(radians(angle)) * insideRadius;
+    py = triangleY + sin(radians(angle)) * insideRadius;
+    vertex(px, py);
+    angle += angleStep;
+  }
+  endShape();
 
 
 
@@ -406,7 +438,38 @@ function draw() {
 
 
 
+  fill('#FFFB38');
+  noStroke();
+  var numPoints = int(map(amplitudeShit13.getLevel()*1000, 0, width, 0, 1000));
+  var angle = 0;
+  var angleStep = 360.0/numPoints;
+  beginShape(TRIANGLE_STRIP);
+  outsideRadius = 200 + amplitudeShit13.getLevel()*500;
+  insideRadius = amplitudeShit13.getLevel()*500;
+  for (var i = 0; i <= numPoints; i++) {
+    var px = triangleX + cos(radians(angle)) * outsideRadius;
+    var py = triangleY + sin(radians(angle)) * outsideRadius;
+    angle += angleStep;
+    vertex(px, py);
+    px = triangleX + cos(radians(angle)) * insideRadius;
+    py = triangleY + sin(radians(angle)) * insideRadius;
+    vertex(px, py);
+    angle += angleStep;
+  }
+  endShape();
 
+
+
+  fill("#6BBF71");
+  var r = width * amplitudeShit15.getLevel();
+  translate(width/2, height/2);
+  beginShape();
+    vertex(0, -r)
+    quadraticVertex(r*2, -r, r*2, 0);
+    quadraticVertex(r*2, r, 0, r);
+    quadraticVertex(-r*2, r, -r*2, 0);
+    quadraticVertex(-r*2, -r, 0, -r);
+  endShape();
 
 
   // //
