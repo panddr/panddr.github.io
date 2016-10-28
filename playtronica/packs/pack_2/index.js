@@ -103,39 +103,39 @@ function draw() {
 
   // randomSeed(random(100000));
 
-  // var angle = 0;
-  // var angleStep = 180.0/100;
-  // var amplitudeShit5Height = map(amplitudeShit5.getLevel(), 0, 10, 0, 40);
-  // beginShape();
-  // for (var i = 0; i < width; i++) {
-  //   var rad = 1000 * noise(i * 0.0005, t * 0.005);
-  //   var py = height + sin(radians(rad))*height/3*amplitudeShit5Height;
-  //   angle += angleStep;
-  //   vertex(i, py);
-  //   fill("#044DA1");
-  // }
-  // t++;
-  // vertex(width, height);
-  // vertex(0, height);
-  // endShape();
+  var angle = 0;
+  var angleStep = 180.0/100;
+  var amplitudeShit8Height = map(amplitudeShit8.getLevel(), 0, 10, 0, 140);
+  beginShape();
+  for (var i = 0; i < width; i++) {
+    var rad = 1000 * noise(i * 0.0005, t * 0.005);
+    var py = height + sin(radians(rad))*height/3*amplitudeShit8Height;
+    angle += angleStep;
+    vertex(i, py);
+    fill("#044DA1");
+  }
+  t++;
+  vertex(width, height);
+  vertex(0, height);
+  endShape();
 
 
 
-  // var angle = 0;
-  // var angleStep = 180.0/100;
-  // var amplitudeShit6Height = map(amplitudeShit6.getLevel(), 0, 10, 0, 40);
-  // beginShape();
-  // for (var i = 0; i < width; i++) {
-  //   var rad = 1000 * noise(i * 0.001, t * 0.005);
-  //   var py = sin(radians(rad))*height/3*amplitudeShit6Height;
-  //   angle += angleStep;
-  //   vertex(i, py);
-  //   fill("#6BBF71");
-  // }
-  // t++;
-  // vertex(width, 0);
-  // vertex(0, 0);
-  // endShape();
+  var angle = 0;
+  var angleStep = 180.0/100;
+  var amplitudeShit6Height = map(amplitudeShit6.getLevel(), 0, 10, 0, 140);
+  beginShape();
+  for (var i = 0; i < width; i++) {
+    var rad = 1000 * noise(i * 0.001, t * 0.005);
+    var py = sin(radians(rad))*height/3*amplitudeShit6Height;
+    angle += angleStep;
+    vertex(i, py);
+    fill("#6BBF71");
+  }
+  t++;
+  vertex(width, 0);
+  vertex(0, 0);
+  endShape();
 
 
   // var angle = 0;
@@ -256,38 +256,38 @@ function draw() {
   ellipse(width/2,height/2,circleRadius2,circleRadius2);
 
 
-  var waveWeight1 = int(map(amplitudeShit5.getLevel(), 0, amplitudeShit5.getLevel(), 0, 8));
-  var angle = 0;
-  var angleStep = 180.0/40;
-  noFill();
-  strokeCap(ROUND);
-  strokeJoin(ROUND);
-  strokeWeight(waveWeight1);
-  stroke('#56D224');
-  beginShape();
-  for (var i = width/4; i < width/4*3; i++) {
-    var py = height/2 + sin(radians(angle))*height/3*amplitudeShit5.getLevel()*1.5;
-    angle += angleStep*0.9;
-    vertex(i, py);
-  }
-  endShape();
+  // var waveWeight1 = int(map(amplitudeShit5.getLevel(), 0, amplitudeShit5.getLevel(), 0, 8));
+  // var angle = 0;
+  // var angleStep = 180.0/40;
+  // noFill();
+  // strokeCap(ROUND);
+  // strokeJoin(ROUND);
+  // strokeWeight(waveWeight1);
+  // stroke('#56D224');
+  // beginShape();
+  // for (var i = width/4; i < width/4*3; i++) {
+  //   var py = height/2 + sin(radians(angle))*height/3*amplitudeShit5.getLevel()*1.5;
+  //   angle += angleStep*0.9;
+  //   vertex(i, py);
+  // }
+  // endShape();
 
 
-  var waveWeight2 = int(map(amplitudeShit6.getLevel(), 0, amplitudeShit6.getLevel(), 0, 8));
-  var angle = 0;
-  var angleStep = 180.0/40;
-  noFill();
-  strokeCap(ROUND);
-  strokeJoin(ROUND);
-  strokeWeight(waveWeight2);
-  stroke('#82D72A');
-  beginShape();
-  for (var i = width/4; i < width/4*3; i++) {
-    var py = height/2 + sin(radians(angle))*height/3*amplitudeShit6.getLevel()*2;
-    angle += angleStep*0.9;
-    vertex(i, py);
-  }
-  endShape();
+  // var waveWeight2 = int(map(amplitudeShit6.getLevel(), 0, amplitudeShit6.getLevel(), 0, 8));
+  // var angle = 0;
+  // var angleStep = 180.0/40;
+  // noFill();
+  // strokeCap(ROUND);
+  // strokeJoin(ROUND);
+  // strokeWeight(waveWeight2);
+  // stroke('#82D72A');
+  // beginShape();
+  // for (var i = width/4; i < width/4*3; i++) {
+  //   var py = height/2 + sin(radians(angle))*height/3*amplitudeShit6.getLevel()*2;
+  //   angle += angleStep*0.9;
+  //   vertex(i, py);
+  // }
+  // endShape();
 
 
   var waveWeight3 = int(map(amplitudeShit7.getLevel(), 0, amplitudeShit7.getLevel(), 0, 8));

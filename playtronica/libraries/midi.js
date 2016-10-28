@@ -29,22 +29,22 @@ function midi() {
 
   // this maps the MIDI key value (60 - 64) to our samples
   var sampleMap = {
-    key60: 1,
-    key61: 2,
-    key62: 3,
-    key63: 4,
-    key64: 5,
-    key65: 6,
-    key66: 7,
-    key67: 8,
-    key68: 9,
-    key69: 10,
-    key70: 11,
-    key71: 12,
-    key72: 13,
-    key73: 14,
-    key74: 15,
-    key75: 16
+    key36: 1,
+    key37: 2,
+    key38: 3,
+    key39: 4,
+    key40: 5,
+    key41: 6,
+    key42: 7,
+    key43: 8,
+    key44: 9,
+    key45: 10,
+    key46: 11,
+    key47: 12,
+    key48: 13,
+    key49: 14,
+    key50: 15,
+    key51: 16
   };
 
   // qwerty keyboard controls. [q,w,e,r,t]
