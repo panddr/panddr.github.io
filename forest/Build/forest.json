@@ -1,9 +1,0 @@
-{
-"TOTAL_MEMORY": 268435456,
-"dataUrl": "forest.data.unityweb",
-"asmCodeUrl": "forest.asm.code.unityweb",
-"asmMemoryUrl": "forest.asm.memory.unityweb",
-"asmFrameworkUrl": "forest.asm.framework.unityweb",
-"splashScreenStyle": "Dark",
-"backgroundColor": "#231F20"
-}
