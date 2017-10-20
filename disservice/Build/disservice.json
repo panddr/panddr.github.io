@@ -1,0 +1,9 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "disservice.data.unityweb",
+"asmCodeUrl": "disservice.asm.code.unityweb",
+"asmMemoryUrl": "disservice.asm.memory.unityweb",
+"asmFrameworkUrl": "disservice.asm.framework.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
